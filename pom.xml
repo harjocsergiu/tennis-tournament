@@ -39,6 +39,8 @@
 			<artifactId>h2</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+<!--		For this to work you have to install Lombok plugin for IDEA.
+		IntelliJ -> Settings(CTRL+ALT+S) -> Plugins -> Marketplace -> Lombok and then install.-->
 		<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
 		<dependency>
 			<groupId>org.projectlombok</groupId>

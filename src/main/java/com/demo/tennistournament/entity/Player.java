@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -39,6 +40,12 @@ public class Player extends User {
 
     @Enumerated(EnumType.STRING)
     private Gender gender;
+
+    @Column
+    private BigDecimal careerEarnings;
+
+    @ManyToMany(mappedBy = "players")
+    private Set<Sponsor> sponsors = new HashSet<>();
 
     protected Player(){ }
 

@@ -6,6 +6,8 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -34,8 +36,18 @@ public class Match {
     @Column
     private LocalDateTime startTime;
 
-    @Column
-    private String court;
+    @ManyToOne
+    @JoinColumn(name="court_id")
+    private Court court;
+
+    @ManyToOne
+    @JoinColumn(name = "tournament_id")
+    private Tournament tournament;
+
+    @OneToMany(mappedBy = "match")
+    private Set<Ticket> tickets = new HashSet<>();
+
+
 
     protected Match() { }
 

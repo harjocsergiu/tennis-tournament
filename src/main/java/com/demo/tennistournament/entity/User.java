@@ -28,6 +28,7 @@ public class User {
     @Column(nullable = false)
     private String lastName;
 
+    @Column
     private boolean admin;
     //private String profilePicture
 

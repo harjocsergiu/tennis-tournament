@@ -1,5 +1,6 @@
 package com.demo.tennistournament;
 
+import com.demo.tennistournament.entity.User;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -13,6 +14,5 @@ public class TennisTournamentApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-
 	}
 }
