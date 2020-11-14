@@ -1,5 +1,6 @@
 package com.demo.tennistournament.entity;
 
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,7 +14,8 @@ public class Match {
 
     @Id
     @GeneratedValue
-    private Integer id;
+    @Setter(AccessLevel.NONE)
+    private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "first_player_id")

@@ -1,5 +1,6 @@
 package com.demo.tennistournament.entity;
 
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,6 +13,7 @@ import javax.persistence.*;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Setter(AccessLevel.NONE)
     private Long id;
 
     @Column(nullable = false, unique = true)

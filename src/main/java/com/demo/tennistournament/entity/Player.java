@@ -1,5 +1,6 @@
 package com.demo.tennistournament.entity;
 
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,6 +16,7 @@ import java.util.Set;
 public class Player extends User {
     @Id
     @GeneratedValue
+    @Setter(AccessLevel.NONE)
     private Long id;
 
     @OneToMany(mappedBy = "firstPlayer")
