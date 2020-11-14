@@ -27,4 +27,12 @@ public class Court {
     private Set<Match> matches = new HashSet<>();
 
     protected Court(){}
+
+    public void addMatch(Match match){
+        this.matches.add(match);
+    }
+
+    public void removeMatch(Match match){
+        this.matches.remove(match);
+    }
 }

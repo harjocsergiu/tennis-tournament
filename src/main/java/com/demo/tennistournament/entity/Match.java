@@ -47,8 +47,10 @@ public class Match {
     @OneToMany(mappedBy = "match")
     private Set<Ticket> tickets = new HashSet<>();
 
-
-
     protected Match() { }
+
+    public void addTicket(Ticket ticket){ this.tickets.add(ticket); }
+
+    public void removeTicket(Ticket ticket){ this.tickets.remove(ticket); }
 
 }

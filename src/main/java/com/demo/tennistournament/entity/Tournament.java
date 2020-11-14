@@ -27,6 +27,12 @@ public class Tournament {
     @OneToMany(mappedBy = "tournament")
     private Set<Match>  matches = new HashSet<>();
 
+    @ManyToMany
+    @JoinTable(name="TOURNAMENT_SPONSOR",
+            joinColumns = @JoinColumn(name="TOURNAMENT_ID"),
+            inverseJoinColumns = @JoinColumn(name="SPONSOR_ID"))
+    private Set<Sponsor> sponsors = new HashSet<>();
+
     @Column
     private String city;
 
@@ -34,4 +40,13 @@ public class Tournament {
     private BigDecimal budget;
 
     protected Tournament(){}
+
+    public void addMatch(Match match){ this.matches.add(match);}
+
+    public void removeMatch(Match match){ this.matches.remove(match);}
+
+    public void addSponsor(Sponsor sponsor){ this.sponsors.add(sponsor); }
+
+    public void removeSponsor(Sponsor sponsor){ this.sponsors.remove(sponsor); }
+
 }

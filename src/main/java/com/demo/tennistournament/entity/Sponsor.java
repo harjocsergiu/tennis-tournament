@@ -26,11 +26,9 @@ public class Sponsor {
     @Column
     private String emailContact;
 
-    @ManyToMany
-    @JoinTable(name="CONTRACT",
-            joinColumns = @JoinColumn(name="SPONSOR_ID"),
-            inverseJoinColumns = @JoinColumn(name="PLAYER_ID"))
-    private Set<Player> players = new HashSet<>();
+    @ManyToMany(mappedBy = "sponsors")
+    private Set<Tournament> tournaments = new HashSet<>();
 
     protected Sponsor(){}
+
 }
