@@ -15,7 +15,7 @@ public class Court {
     @Id
     @GeneratedValue
     @Setter(AccessLevel.NONE)
-    private Byte id;
+    private Short id;
 
     @Column(nullable = false, unique = true)
     private String name;

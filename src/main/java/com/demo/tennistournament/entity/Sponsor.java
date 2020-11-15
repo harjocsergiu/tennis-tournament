@@ -5,8 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Getter
@@ -28,6 +27,11 @@ public class Sponsor {
 
     @ManyToMany(mappedBy = "sponsors")
     private Set<Tournament> tournaments = new HashSet<>();
+
+    @OneToMany(mappedBy = "sponsor",
+                cascade = CascadeType.ALL,
+                orphanRemoval = true)
+    private List<PlayerSponsorContract> players = new ArrayList<>();
 
     protected Sponsor(){}
 

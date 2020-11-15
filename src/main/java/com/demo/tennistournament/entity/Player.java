@@ -6,8 +6,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Getter
 @Setter
@@ -31,7 +30,7 @@ public class Player extends User {
     private int ranking;
 
     @Column(nullable = false)
-    private int age;
+    private byte age;
 
     @Column
     private String nationality;
@@ -42,12 +41,29 @@ public class Player extends User {
     @Column
     private BigDecimal careerEarnings;
 
-    @ManyToMany(mappedBy = "players")
-    private Set<Sponsor> sponsors = new HashSet<>();
+    @OneToMany(mappedBy = "player",
+                cascade = CascadeType.ALL,
+                orphanRemoval = true)
+    private List<PlayerSponsorContract> sponsors = new ArrayList<>();
 
-    public void addSponsor(Sponsor sponsor){ this.sponsors.add(sponsor); }
+    public void addSponsor(Sponsor sponsor){
+        PlayerSponsorContract playerSponsorContract = new PlayerSponsorContract(this,sponsor);
+        sponsors.add(playerSponsorContract);
+        sponsor.getPlayers().add(playerSponsorContract);
+    }
 
-    public void removeSponsor(Sponsor sponsor){ this.sponsors.remove(sponsor); }
+    public void removeSponsor(Sponsor sponsor){
+        for(Iterator<PlayerSponsorContract> iterator = sponsors.iterator(); iterator.hasNext(); ){
+            PlayerSponsorContract psContract = iterator.next();
+
+            if(psContract.getPlayer().equals(this) && psContract.getSponsor().equals(sponsor)){
+                iterator.remove();
+                psContract.getSponsor().getPlayers().remove(psContract);
+                psContract.setPlayer(null);
+                psContract.setSponsor(null);
+            }
+        }
+    }
 
     protected Player(){ }
 

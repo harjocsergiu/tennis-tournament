@@ -9,6 +9,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Entity
+@Table(name="Users")
 @Inheritance(strategy = InheritanceType.JOINED)
 public class User {
     @Id
