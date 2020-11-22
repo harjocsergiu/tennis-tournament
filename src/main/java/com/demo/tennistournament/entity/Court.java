@@ -26,7 +26,15 @@ public class Court {
     @OneToMany(mappedBy = "court")
     private Set<Match> matches = new HashSet<>();
 
-    protected Court(){}
+    public Court(){}
+
+    public Court(Short id, String name, Short capacity) {
+        super();
+        this.id = id;
+        this.name = name;
+        this.capacity = capacity;
+    }
+
 
     public void addMatch(Match match){
         this.matches.add(match);
@@ -34,5 +42,11 @@ public class Court {
 
     public void removeMatch(Match match){
         this.matches.remove(match);
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%nCourt{name=%s, capacity=%s}",name,capacity);
+
     }
 }
