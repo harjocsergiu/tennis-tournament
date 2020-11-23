@@ -30,16 +30,13 @@ public class CourtJdbcDao {
                 new BeanPropertyRowMapper<Court>(Court.class));
     }
 
-    //TO DO
-    public List<Court> findWhenCapacityIsLowerThan(String name) {
-        return jdbcTemplate.query("select * from court where name=?", new Object[]{name},
+    public List<Court> findWhereCapacityIsLessThan(Short capacity) {
+        return jdbcTemplate.query("select * from court where capacity < ?", new Object[]{capacity},
                 new BeanPropertyRowMapper<Court>(Court.class));
     }
 
-
-    //TO DO
-    public List<Court> findWhereCapacityIsGreaterThan(String name) {
-        return jdbcTemplate.query("select * from court where name=?", new Object[]{name},
+    public List<Court> findWhereCapacityIsGreaterThanOrEqual(Short capacity) {
+        return jdbcTemplate.query("select * from court where capacity >= ?", new Object[]{capacity},
                 new BeanPropertyRowMapper<Court>(Court.class));
     }
 }
