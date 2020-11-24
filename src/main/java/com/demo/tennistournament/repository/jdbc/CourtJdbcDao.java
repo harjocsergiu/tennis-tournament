@@ -39,4 +39,23 @@ public class CourtJdbcDao {
         return jdbcTemplate.query("select * from court where capacity >= ?", new Object[]{capacity},
                 new BeanPropertyRowMapper<Court>(Court.class));
     }
+
+    //returns int - how many rows were deleted
+    public int deleteById(short id){
+        return jdbcTemplate.update("delete from COURT where id=?", new Object[]{id});
+    }
+
+    public int deleteByName(String name){
+        return jdbcTemplate.update("delete from COURT where name=?", new Object[]{name});
+    }
+
+    public int insert(Court court){
+        return jdbcTemplate.update("insert into court(id,name,capacity) values (?, ?, ?)",
+                new Object[]{court.getId(),court.getName(),court.getCapacity()});
+    }
+
+    public int update(Court court){
+        return jdbcTemplate.update("update court set name = ?, capacity = ? where id = ?",
+                new Object[]{court.getName(),court.getCapacity(), court.getId()});
+    }
 }
