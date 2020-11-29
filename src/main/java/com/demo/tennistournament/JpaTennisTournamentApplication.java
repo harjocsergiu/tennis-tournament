@@ -10,7 +10,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class TennisTournamentApplication implements CommandLineRunner {
+public class JpaTennisTournamentApplication implements CommandLineRunner {
 
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -18,19 +18,12 @@ public class TennisTournamentApplication implements CommandLineRunner {
 	CourtJdbcDao dao;
 
 	public static void main(String[] args) {
-		SpringApplication.run(TennisTournamentApplication.class, args);
+		SpringApplication.run(JpaTennisTournamentApplication.class, args);
 	}
 
 	@Override
 	public void run(String... args) throws InterruptedException {
 		Thread.sleep(1000);
-//		logger.info("All Courts-> {}",dao.findAll());
-//		logger.info("Court Id 1 ->{}",dao.findById((short) 1));
-//		logger.info("Capacity less ->{}",dao.findWhereCapacityIsLessThan((short) 4000));
-//		logger.info("%n");
-//		logger.info("Capacity greater ->{}",dao.findWhereCapacityIsGreaterThanOrEqual((short) 5000));
-		logger.info("Delete by Id -> No of rows deleted {}", dao.deleteById((short) 4));
-		dao.insert(new Court((short)1000,"namenew",(short)10001));
-		dao.update(new Court((short)1000,"updatedName",(short)7777));
+
 	}
 }
