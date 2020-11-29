@@ -1,6 +1,5 @@
 package com.demo.tennistournament.entity;
 
-import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,7 +13,6 @@ import java.util.Set;
 public class Court {
     @Id
     @GeneratedValue
-    @Setter(AccessLevel.NONE)
     private Short id;
 
     @Column(nullable = false, unique = true)
@@ -34,7 +32,6 @@ public class Court {
         this.name = name;
         this.capacity = capacity;
     }
-
 
     public void addMatch(Match match){
         this.matches.add(match);
