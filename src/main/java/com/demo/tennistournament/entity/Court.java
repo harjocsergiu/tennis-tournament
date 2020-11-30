@@ -10,9 +10,10 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter
+@NamedQuery(name="find_all_courts",query = "select c from Court c")
 public class Court {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Short id;
 
     @Column(nullable = false, unique = true)
@@ -27,8 +28,14 @@ public class Court {
     public Court(){}
 
     public Court(Short id, String name, Short capacity) {
-        super();
+//        super();
         this.id = id;
+        this.name = name;
+        this.capacity = capacity;
+    }
+
+    public Court(String name, Short capacity) {
+        super();
         this.name = name;
         this.capacity = capacity;
     }
