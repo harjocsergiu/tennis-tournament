@@ -1,4 +1,4 @@
-package com.demo.tennistournament.repository.jdbc;
+package com.demo.tennistournament.repository.demotest;
 
 import com.demo.tennistournament.entity.Court;
 import org.springframework.beans.factory.annotation.Autowired;
