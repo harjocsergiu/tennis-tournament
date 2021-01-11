@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    targetNamespace="http://tennis-tournament.com/courts" xmlns:tns="http://tennis-tournament.com/courts"
+    elementFormDefault="qualified">
+
+    <xs:element name="getCourtRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="name" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getCourtResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="court" type="tns:court"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="court">
+        <xs:sequence>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="capacity" type="xs:int"/>
+        </xs:sequence>
+    </xs:complexType>
+
+</xs:schema>
