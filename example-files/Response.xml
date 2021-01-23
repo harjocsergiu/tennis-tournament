@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<GetCourtDetailsResponse xmlns="http://tennis-tournament.com/courts">
+    <CourtDetails>
+        <name>String</name>
+        <capacity>30000</capacity>
+    </CourtDetails>
+</GetCourtDetailsResponse>

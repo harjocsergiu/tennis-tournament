@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
+<?xml version="1.0" encoding="UTF-8" ?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-    targetNamespace="http://tennis-tournament.com/courts" xmlns:tns="http://tennis-tournament.com/courts"
-    elementFormDefault="qualified">
+           targetNamespace="http://tennis-tournament.com/courts"
+           xmlns:tns="http://tennis-tournament.com/courts"
+           elementFormDefault="qualified">
 
-    <xs:element name="getCourtRequest">
+    <xs:element name="GetCourtDetailsRequest">
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="name" type="xs:string"/>
@@ -12,18 +12,18 @@
         </xs:complexType>
     </xs:element>
 
-    <xs:element name="getCourtResponse">
+    <xs:element name="GetCourtDetailsResponse">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="court" type="tns:court"/>
+                <xs:element name="CourtDetails" type="tns:CourtDetails"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
 
-    <xs:complexType name="court">
+    <xs:complexType name="CourtDetails">
         <xs:sequence>
             <xs:element name="name" type="xs:string"/>
-            <xs:element name="capacity" type="xs:int"/>
+            <xs:element name="capacity" type="xs:short"/>
         </xs:sequence>
     </xs:complexType>
 

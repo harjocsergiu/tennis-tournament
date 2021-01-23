@@ -49,8 +49,12 @@ public class Match {
 
     protected Match() { }
 
-    public void addTicket(Ticket ticket){ this.tickets.add(ticket); }
+    public void addTicket(Ticket ticket){
+        this.tickets.add(ticket);
+    }
 
-    public void removeTicket(Ticket ticket){ this.tickets.remove(ticket); }
+    public void removeTicket(Ticket ticket){
+        this.tickets.remove(ticket);
+    }
 
 }
