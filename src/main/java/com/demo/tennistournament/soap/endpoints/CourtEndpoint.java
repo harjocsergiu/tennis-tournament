@@ -3,7 +3,7 @@ package com.demo.tennistournament.soap.endpoints;
 import com.demo.tennistournament.entity.Court;
 import com.demo.tennistournament.exception.CourtNotFoundException;
 import com.demo.tennistournament.service.CourtService;
-import com.tennis_tournament.courts.*;
+import com.tennis_tournament.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
@@ -46,10 +46,10 @@ public class CourtEndpoint {
         return response;
     }
 
-    private com.tennis_tournament.courts.Status mapStatus(CourtService.Status status) {
+    private com.tennis_tournament.Status mapStatus(CourtService.Status status) {
         if(status== CourtService.Status.FAILURE)
-            return com.tennis_tournament.courts.Status.FAILURE;
-        return com.tennis_tournament.courts.Status.SUCCESS;
+            return com.tennis_tournament.Status.FAILURE;
+        return com.tennis_tournament.Status.SUCCESS;
     }
 
     private GetCourtDetailsResponse mapCourtDetails(Court court) {
