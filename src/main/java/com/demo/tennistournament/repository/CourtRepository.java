@@ -1,6 +1,6 @@
 package com.demo.tennistournament.repository;
 
-import com.demo.tennistournament.entity.Court;
+import com.demo.tennistournament.model.Court;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;

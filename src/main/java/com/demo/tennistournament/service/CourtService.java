@@ -1,6 +1,6 @@
 package com.demo.tennistournament.service;
 
-import com.demo.tennistournament.entity.Court;
+import com.demo.tennistournament.model.Court;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;

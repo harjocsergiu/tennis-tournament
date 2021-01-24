@@ -1,6 +1,5 @@
-package com.demo.tennistournament.entity;
+package com.demo.tennistournament.model;
 
-import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;

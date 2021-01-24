@@ -1,6 +1,6 @@
 package com.demo.tennistournament.repository;
 
-import com.demo.tennistournament.entity.Court;
+import com.demo.tennistournament.model.Court;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

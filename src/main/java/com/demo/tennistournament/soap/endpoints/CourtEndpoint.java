@@ -1,7 +1,7 @@
 package com.demo.tennistournament.soap.endpoints;
 
-import com.demo.tennistournament.entity.Court;
-import com.demo.tennistournament.exception.CourtNotFoundException;
+import com.demo.tennistournament.model.Court;
+import com.demo.tennistournament.soap.exception.CourtNotFoundException;
 import com.demo.tennistournament.service.CourtService;
 import com.tennis_tournament.*;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package com.demo.tennistournament.exception;
+package com.demo.tennistournament.soap.exception;
 
 import org.springframework.ws.soap.server.endpoint.annotation.FaultCode;
 import org.springframework.ws.soap.server.endpoint.annotation.SoapFault;
