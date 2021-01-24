@@ -10,6 +10,10 @@ import java.util.List;
 @Component
 public class CourtService {
 
+    public enum Status{
+        SUCCESS, FAILURE;
+    }
+
     private static List<Court> courts = new ArrayList<>();
 
     static {
@@ -35,15 +39,15 @@ public class CourtService {
         return courts;
     }
 
-    public int deleteByName(String name){
+    public Status deleteByName(String name){
         Iterator<Court> iterator = courts.iterator();
         while(iterator.hasNext()){
             Court court = iterator.next();
             if(court.getName().equals(name)){
                 iterator.remove();
-                return 1;
+                return Status.SUCCESS;
             }
         }
-        return 0;
+        return Status.FAILURE;
     }
 }

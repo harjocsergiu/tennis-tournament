@@ -30,7 +30,7 @@ public class WebServiceConfig extends WsConfigurerAdapter {
         DefaultWsdl11Definition courtsDefinition = new DefaultWsdl11Definition();
         courtsDefinition.setPortTypeName("CourtsPort");
         courtsDefinition.setLocationUri("/ws");
-        courtsDefinition.setTargetNamespace("http://tennis-tournament.com/courts");
+        courtsDefinition.setTargetNamespace("http://tennis-tournament.com/");
         courtsDefinition.setSchema(courtsSchema);
         return courtsDefinition;
     }
