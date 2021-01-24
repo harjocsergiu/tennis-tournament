@@ -1,5 +1,7 @@
 package com.demo.tennistournament.model;
 
+import com.demo.tennistournament.model.enums.Gender;
+import com.demo.tennistournament.model.enums.PrimaryHand;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;

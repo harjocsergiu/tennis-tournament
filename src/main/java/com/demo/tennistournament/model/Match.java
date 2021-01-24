@@ -1,5 +1,6 @@
 package com.demo.tennistournament.model;
 
+import com.demo.tennistournament.model.enums.Phase;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
