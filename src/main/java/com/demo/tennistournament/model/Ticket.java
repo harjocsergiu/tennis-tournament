@@ -3,6 +3,8 @@ package com.demo.tennistournament.model;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
+import org.springframework.hateoas.RepresentationModel;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -10,7 +12,8 @@ import java.math.BigDecimal;
 @Entity
 @Getter
 @Setter
-public class Ticket {
+@ToString
+public class Ticket{
     @Id
     @GeneratedValue
     @Setter(AccessLevel.NONE)
