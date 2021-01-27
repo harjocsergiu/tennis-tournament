@@ -1,6 +1,7 @@
 package com.demo.tennistournament.service;
 
 import com.demo.tennistournament.model.User;
+import com.demo.tennistournament.model.UserRegisterUtil;
 import com.demo.tennistournament.model.enums.RegisterState;
 import com.demo.tennistournament.model.enums.ResetPasswordResponse;
 import com.demo.tennistournament.repository.UserRepository;
@@ -15,13 +16,12 @@ public class UserServiceImpl implements UserService{
     private UserRepository userRepository;
 
     @Override
-    public RegisterState registerUser(String email, String password, String firstName, String lastName) {
+    public UserRegisterUtil registerUser(String email, String password, String firstName, String lastName) {
         if(userRepository.findFirstByEmail(email).isPresent()){
-            return RegisterState.EMAIL_DUPLICATE;
+            return new UserRegisterUtil(RegisterState.EMAIL_DUPLICATE,null);
         }
         User user = new User(email,password,firstName,lastName);
-        userRepository.save(user);
-        return RegisterState.REGISTERED;
+        return new UserRegisterUtil(RegisterState.REGISTERED, userRepository.save(user));
     }
 
     @Override
