@@ -25,7 +25,6 @@ public class TicketController {
     @GetMapping(path = "/api/tickets")
     public List<Ticket> retrieveAllTickets(){
         return ticketRepository.findAll();
-
     }
 
     @GetMapping(path="/api/tickets/{id}")
