@@ -13,5 +13,5 @@ values (2,'email2','password2','fname2','lname2',false);
 insert into users(id,email,password,first_name,last_name,admin)
 values (3,'email3','password3','fname3','lname3',false);
 
-insert into player(id,age,career_earnings,nationality,ranking)
-values(1,25,30000,'Spnaiard',13);
+insert into player(player_id,age,career_earnings,nationality,ranking)
+values(1,25,30000,'Spaniard',13);

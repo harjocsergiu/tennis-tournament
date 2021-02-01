@@ -6,7 +6,6 @@ import com.demo.tennistournament.exception.ResourceAlreadyExists;
 import com.demo.tennistournament.model.UserRegisterUtil;
 import com.demo.tennistournament.model.pojos.UserRegisterPOJO;
 import com.demo.tennistournament.service.UserService;
-import com.demo.tennistournament.service.Utils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -33,18 +32,15 @@ public class UserController {
         UserRegisterPOJO userRegisterPOJO = null;
         try {
             userRegisterPOJO = objectMapper.readValue(json, UserRegisterPOJO.class);
-            System.out.println(userRegisterPOJO);
         } catch (IOException ex) {
 //            throw new InvalidRequestBodyFormatException(INVALID_REQUEST_BODY + "SHOULD ADD MORE SPECIFIC DETAILS");
             throw new InvalidRequestBodyFormatException(ex.getMessage());
         }
-        if (!userRegisterPOJO.getPassword().equals(userRegisterPOJO.getRepeatPassword())) {
-            throw new PlacerHolderException(PASSWORDS_DO_NOT_MATCH);
-        }
 
-        UserRegisterUtil userRegisterUtil = userService.registerUser(userRegisterPOJO.getEmail(), userRegisterPOJO.getPassword(),
-                userRegisterPOJO.getFirstName(), userRegisterPOJO.getLastName());
+        UserRegisterUtil userRegisterUtil = userService.registerUser(userRegisterPOJO);
         switch (userRegisterUtil.getRegisterState()) {
+            case PASSWORDS_DO_NOT_MATCH:
+                throw new PlacerHolderException(PASSWORDS_DO_NOT_MATCH_EXCEPTION);
             case EMAIL_DUPLICATE:
                 throw new ResourceAlreadyExists(EMAIL_REGISTERED);
             case WEAK_PASSWORD:

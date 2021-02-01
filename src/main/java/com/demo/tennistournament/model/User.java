@@ -17,6 +17,11 @@ public class User {
     @Setter(AccessLevel.NONE)
     private Long id;
 
+
+    @OneToOne(mappedBy = "user")
+    @PrimaryKeyJoinColumn
+    private Player player;
+
     @Column(nullable = false, unique = true)
     private String email;
 

@@ -13,11 +13,17 @@ import java.util.*;
 @Getter
 @Setter
 @Entity
-public class Player extends User {
+public class Player {
     @Id
     @GeneratedValue
     @Setter(AccessLevel.NONE)
+    @Column(name = "player_id")
     private Long id;
+
+    @OneToOne
+    @MapsId
+    @JoinColumn(name = "player_id")
+    private User user;
 
     @OneToMany(mappedBy = "firstPlayer")
     private Set<Match> matches1 = new HashSet<>();
