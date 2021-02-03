@@ -1,7 +1,6 @@
 package com.demo.tennistournament.controller;
 
-import com.demo.tennistournament.exception.InvalidRequestBodyFormatException;
-import com.demo.tennistournament.exception.PlacerHolderException;
+import com.demo.tennistournament.exception.BadRequestException;
 import com.demo.tennistournament.exception.ResourceAlreadyExists;
 import com.demo.tennistournament.model.UserRegisterUtil;
 import com.demo.tennistournament.model.pojos.UserRegisterPOJO;
@@ -33,18 +32,17 @@ public class UserController {
         try {
             userRegisterPOJO = objectMapper.readValue(json, UserRegisterPOJO.class);
         } catch (IOException ex) {
-//            throw new InvalidRequestBodyFormatException(INVALID_REQUEST_BODY + "SHOULD ADD MORE SPECIFIC DETAILS");
-            throw new InvalidRequestBodyFormatException(ex.getMessage());
+            throw new BadRequestException(ex.getMessage());
         }
 
         UserRegisterUtil userRegisterUtil = userService.registerUser(userRegisterPOJO);
         switch (userRegisterUtil.getRegisterState()) {
             case PASSWORDS_DO_NOT_MATCH:
-                throw new PlacerHolderException(PASSWORDS_DO_NOT_MATCH_EXCEPTION);
+                throw new BadRequestException(PASSWORDS_DO_NOT_MATCH_EXCEPTION);
             case EMAIL_DUPLICATE:
                 throw new ResourceAlreadyExists(EMAIL_REGISTERED);
             case WEAK_PASSWORD:
-                throw new PlacerHolderException(WEAK_PASSWORD_EXCEPTION);
+                throw new BadRequestException(WEAK_PASSWORD_EXCEPTION);
             case REGISTERED:
                 URI location = ServletUriComponentsBuilder
                         .fromCurrentRequest()

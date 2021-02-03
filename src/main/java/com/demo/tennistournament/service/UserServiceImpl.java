@@ -1,6 +1,5 @@
 package com.demo.tennistournament.service;
 
-import com.demo.tennistournament.exception.PlacerHolderException;
 import com.demo.tennistournament.model.User;
 import com.demo.tennistournament.model.UserRegisterUtil;
 import com.demo.tennistournament.model.enums.RegisterState;

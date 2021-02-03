@@ -26,7 +26,6 @@ public class PlayerController {
         Optional<Player> player = playerRepository.findById(id);
         if(player.isEmpty())
             throw new RuntimeException("Player not found");
-
         return player.get();
     }
 

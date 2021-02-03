@@ -31,20 +31,14 @@ public class TennisResponseEntityExceptionHandler extends ResponseEntityExceptio
         return new ResponseEntity<>(exceptionResponse,exceptionResponse.getStatus());
     }
 
-    @ExceptionHandler(InvalidRequestBodyFormatException.class)
-    public final ResponseEntity<Object> handleInvalidRequestBodyFormatException(InvalidRequestBodyFormatException ex){
-        ExceptionResponse exceptionResponse = new ExceptionResponse(HttpStatus.BAD_REQUEST, ex.getMessage());
-        return new ResponseEntity<>(exceptionResponse,exceptionResponse.getStatus());
-    }
-
     @ExceptionHandler(ResourceAlreadyExists.class)
     public final ResponseEntity<Object> handleResourceAlreadyExistsException(ResourceAlreadyExists ex){
         ExceptionResponse exceptionResponse = new ExceptionResponse(HttpStatus.CONFLICT, ex.getMessage());
         return new ResponseEntity<>(exceptionResponse,exceptionResponse.getStatus());
     }
 
-    @ExceptionHandler(PlacerHolderException.class)
-    public final ResponseEntity<Object> handlePlacerHolderException(PlacerHolderException ex){
+    @ExceptionHandler(BadRequestException.class)
+    public final ResponseEntity<Object> handlePlacerHolderException(BadRequestException ex){
         ExceptionResponse exceptionResponse = new ExceptionResponse(HttpStatus.BAD_REQUEST, ex.getMessage());
         return new ResponseEntity<>(exceptionResponse,exceptionResponse.getStatus());
     }
