@@ -3,8 +3,9 @@ package com.demo.tennistournament.controller;
 import com.demo.tennistournament.exception.BadRequestException;
 import com.demo.tennistournament.exception.ResourceAlreadyExists;
 import com.demo.tennistournament.model.UserRegisterUtil;
-import com.demo.tennistournament.model.pojos.UserRegisterPOJO;
+import com.demo.tennistournament.model.UserRegisterRequest;
 import com.demo.tennistournament.service.UserService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.io.IOException;
 import java.net.URI;
 
@@ -26,16 +28,9 @@ public class UserController {
     private UserService userService;
 
     @PostMapping(path = "/api/user/register")
-    public ResponseEntity<Object> register(@RequestBody String json) {
-        final ObjectMapper objectMapper = new ObjectMapper();
-        UserRegisterPOJO userRegisterPOJO = null;
-        try {
-            userRegisterPOJO = objectMapper.readValue(json, UserRegisterPOJO.class);
-        } catch (IOException ex) {
-            throw new BadRequestException(ex.getMessage());
-        }
+    public ResponseEntity<Object> register(@Valid @RequestBody UserRegisterRequest userRegisterRequest ) {
 
-        UserRegisterUtil userRegisterUtil = userService.registerUser(userRegisterPOJO);
+        UserRegisterUtil userRegisterUtil = userService.registerUser(userRegisterRequest);
         switch (userRegisterUtil.getRegisterState()) {
             case PASSWORDS_DO_NOT_MATCH:
                 throw new BadRequestException(PASSWORDS_DO_NOT_MATCH_EXCEPTION);

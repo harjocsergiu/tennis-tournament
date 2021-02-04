@@ -11,5 +11,4 @@ public class ExceptionMessages {
             "  At least 1 capital letter" +
             "  At least 1 lowercase letter" +
             "  At least 1 digit";
-
 }
