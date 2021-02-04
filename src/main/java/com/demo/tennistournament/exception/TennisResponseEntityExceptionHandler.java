@@ -11,6 +11,10 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import static com.demo.tennistournament.exception.ExceptionMessages.*;
+import static com.demo.tennistournament.exception.ExceptionMessages.FieldValidation.VALIDATION_ERROR;
+import static com.demo.tennistournament.utils.Constants.SPACE;
+
 @ControllerAdvice
 public class TennisResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
 
@@ -28,13 +32,18 @@ public class TennisResponseEntityExceptionHandler extends ResponseEntityExceptio
 
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
-        StringBuilder exceptionMessage = new StringBuilder();
-        exceptionMessage.append("Validation error: ");
-        for (FieldError fieldError : ex.getBindingResult().getFieldErrors()) {
-            exceptionMessage.append(fieldError.getField()).append(" -> ").append(fieldError.getDefaultMessage()).append("\\n");
-        }
-        ExceptionResponse exceptionResponse = new ExceptionResponse(HttpStatus.BAD_REQUEST, exceptionMessage.toString()); // add more details
+        ExceptionResponse exceptionResponse = createExceptionResponseMethodArgumentNotValid(ex);
         return new ResponseEntity<>(exceptionResponse, exceptionResponse.getStatus());
+    }
+
+    private ExceptionResponse createExceptionResponseMethodArgumentNotValid(MethodArgumentNotValidException ex){
+        ExceptionResponse exceptionResponse = new ExceptionResponse(HttpStatus.BAD_REQUEST, VALIDATION_ERROR);
+        for (FieldError fieldError : ex.getBindingResult().getFieldErrors()) {
+            StringBuilder exceptionMessage = new StringBuilder();
+            exceptionMessage.append(fieldError.getField()).append(SPACE).append(fieldError.getDefaultMessage());
+            exceptionResponse.addErrorDetail(exceptionMessage.toString());
+        }
+        return exceptionResponse;
     }
 
     @ExceptionHandler(ResourceAlreadyExists.class)
@@ -51,7 +60,8 @@ public class TennisResponseEntityExceptionHandler extends ResponseEntityExceptio
 
     @Override
     protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
-        ExceptionResponse exceptionResponse = new ExceptionResponse(HttpStatus.BAD_REQUEST, ex.getMessage());
+        ExceptionResponse exceptionResponse = new ExceptionResponse(HttpStatus.BAD_REQUEST, INVALID_JSON_IN_REQUEST_BODY);
+        exceptionResponse.addErrorDetail(ex.getMessage());
         return new ResponseEntity<>(exceptionResponse, exceptionResponse.getStatus());
     }
 }
