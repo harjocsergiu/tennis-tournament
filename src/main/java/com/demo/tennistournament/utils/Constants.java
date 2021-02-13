@@ -6,5 +6,6 @@ public final class Constants {
     public static final String BOOLEAN_TRUE = "true";
     public static final String BOOLEAN_FALSE = "false";
     public static final String LINE_SEPARATOR = System.getProperty("line.separator");
+    public static final String AUTHORIZATION = "Authorization";
 
 }

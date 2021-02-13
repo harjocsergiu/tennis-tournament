@@ -4,6 +4,8 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -36,24 +38,14 @@ public class TennisResponseEntityExceptionHandler extends ResponseEntityExceptio
         return new ResponseEntity<>(exceptionResponse, exceptionResponse.getStatus());
     }
 
-    private ExceptionResponse createExceptionResponseMethodArgumentNotValid(MethodArgumentNotValidException ex){
-        ExceptionResponse exceptionResponse = new ExceptionResponse(HttpStatus.BAD_REQUEST, VALIDATION_ERROR);
-        for (FieldError fieldError : ex.getBindingResult().getFieldErrors()) {
-            StringBuilder exceptionMessage = new StringBuilder();
-            exceptionMessage.append(fieldError.getField()).append(SPACE).append(fieldError.getDefaultMessage());
-            exceptionResponse.addErrorDetail(exceptionMessage.toString());
-        }
-        return exceptionResponse;
-    }
-
     @ExceptionHandler(ResourceAlreadyExists.class)
     public final ResponseEntity<Object> handleResourceAlreadyExistsException(ResourceAlreadyExists ex) {
         ExceptionResponse exceptionResponse = new ExceptionResponse(HttpStatus.CONFLICT, ex.getMessage());
         return new ResponseEntity<>(exceptionResponse, exceptionResponse.getStatus());
     }
 
-    @ExceptionHandler(BadRequestException.class)
-    public final ResponseEntity<Object> handleBadRequestException(BadRequestException ex) {
+    @ExceptionHandler({BadRequestException.class, InternalAuthenticationServiceException.class, BadCredentialsException.class})
+    public final ResponseEntity<Object> handleBadRequestException(Exception ex) {
         ExceptionResponse exceptionResponse = new ExceptionResponse(HttpStatus.BAD_REQUEST, ex.getMessage());
         return new ResponseEntity<>(exceptionResponse, exceptionResponse.getStatus());
     }
@@ -63,5 +55,16 @@ public class TennisResponseEntityExceptionHandler extends ResponseEntityExceptio
         ExceptionResponse exceptionResponse = new ExceptionResponse(HttpStatus.BAD_REQUEST, INVALID_JSON_IN_REQUEST_BODY);
         exceptionResponse.addErrorDetail(ex.getMessage());
         return new ResponseEntity<>(exceptionResponse, exceptionResponse.getStatus());
+    }
+
+
+    private ExceptionResponse createExceptionResponseMethodArgumentNotValid(MethodArgumentNotValidException ex){
+        ExceptionResponse exceptionResponse = new ExceptionResponse(HttpStatus.BAD_REQUEST, VALIDATION_ERROR);
+        for (FieldError fieldError : ex.getBindingResult().getFieldErrors()) {
+            StringBuilder exceptionMessage = new StringBuilder();
+            exceptionMessage.append(fieldError.getField()).append(SPACE).append(fieldError.getDefaultMessage());
+            exceptionResponse.addErrorDetail(exceptionMessage.toString());
+        }
+        return exceptionResponse;
     }
 }

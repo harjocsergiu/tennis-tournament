@@ -1,4 +1,9 @@
-package com.demo.tennistournament.service;
+package com.demo.tennistournament.utils;
+
+import com.demo.tennistournament.model.Role;
+import com.demo.tennistournament.payload.request.SignupRequest;
+
+import java.util.Set;
 
 public class Utils {
 
@@ -16,4 +21,5 @@ public class Utils {
         }
         return strongPassword;
     }
+
 }

@@ -5,11 +5,13 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
 @Entity
-@Table(name="Users")
+@Table(name="users")
 @Inheritance(strategy = InheritanceType.JOINED)
 public class User {
     @Id
@@ -18,7 +20,7 @@ public class User {
     private Long id;
 
 
-    @OneToOne(mappedBy = "user")
+    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
     @PrimaryKeyJoinColumn
     private Player player;
 
@@ -34,9 +36,11 @@ public class User {
     @Column(nullable = false)
     private String lastName;
 
-    @Column
-    private boolean admin;
-    //private String profilePicture
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(	name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles = new HashSet<>();
 
     protected User(){}
 
@@ -46,15 +50,5 @@ public class User {
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.admin = false;
-    }
-
-    public User(String email, String password, String firstName, String lastName, boolean admin) {
-        super();
-        this.email = email;
-        this.password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.admin = admin;
     }
 }

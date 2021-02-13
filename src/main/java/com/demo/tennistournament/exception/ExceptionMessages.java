@@ -2,6 +2,7 @@ package com.demo.tennistournament.exception;
 
 public class ExceptionMessages {
     public static final String TICKET_NOT_FOUND = "Ticket not found.";
+    public static final String ROLE_NOT_FOUND = "Role is not found.";
     public static final String EMAIL_REGISTERED = "This email is already registered.";
     public static final String PASSWORDS_DO_NOT_MATCH_EXCEPTION = "Password and repeatPassword must match.";
     public static final String WEAK_PASSWORD_EXCEPTION = "Password must contain:"+

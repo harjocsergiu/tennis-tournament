@@ -1,15 +1,24 @@
 package com.demo.tennistournament.service;
 
+import com.demo.tennistournament.exception.ResourceNotFoundException;
+import com.demo.tennistournament.model.Role;
 import com.demo.tennistournament.model.User;
-import com.demo.tennistournament.model.UserRegisterUtil;
+import com.demo.tennistournament.model.UserDetailsImpl;
+import com.demo.tennistournament.utils.SignupUtil;
 import com.demo.tennistournament.model.enums.RegisterState;
 import com.demo.tennistournament.model.enums.ResetPasswordResponse;
-import com.demo.tennistournament.model.UserRegisterRequest;
+import com.demo.tennistournament.payload.request.SignupRequest;
+import com.demo.tennistournament.repository.RoleRepository;
 import com.demo.tennistournament.repository.UserRepository;
+import com.demo.tennistournament.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.validation.Valid;
+import java.util.HashSet;
+import java.util.Set;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -17,23 +26,40 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private RoleRepository roleRepository;
+
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
     @Override
-    public UserRegisterUtil registerUser(final UserRegisterRequest userRegisterRequest) {
-        if (!userRegisterRequest.getPassword().equals(userRegisterRequest.getRepeatPassword()))
-            return new UserRegisterUtil(RegisterState.PASSWORDS_DO_NOT_MATCH,null);
+    public SignupUtil registerUser(final SignupRequest signupRequest) {
+        if (!signupRequest.getPassword().equals(signupRequest.getRepeatPassword()))
+            return new SignupUtil(RegisterState.PASSWORDS_DO_NOT_MATCH,null);
 
-        if (userRepository.findFirstByEmail(userRegisterRequest.getEmail()).isPresent())
-            return new UserRegisterUtil(RegisterState.EMAIL_DUPLICATE, null);
+        if (userRepository.findFirstByEmail(signupRequest.getEmail()).isPresent())
+            return new SignupUtil(RegisterState.EMAIL_DUPLICATE, null);
 
-        if (!Utils.isValidPassword(userRegisterRequest.getPassword()))
-            return new UserRegisterUtil(RegisterState.WEAK_PASSWORD, null);
+        if (!Utils.isValidPassword(signupRequest.getPassword()))
+            return new SignupUtil(RegisterState.WEAK_PASSWORD, null);
 
-        User user = new User(userRegisterRequest.getEmail(), userRegisterRequest.getPassword(), userRegisterRequest.getFirstName(), userRegisterRequest.getLastName());
-        return new UserRegisterUtil(RegisterState.REGISTERED, userRepository.save(user));
+        User user = new User(signupRequest.getEmail(), passwordEncoder.encode(signupRequest.getPassword()), signupRequest.getFirstName(), signupRequest.getLastName());
+
+        Set<Role> roles = SignupUtil.retrieveRole(signupRequest,roleRepository);
+        user.setRoles(roles);
+
+        return new SignupUtil(RegisterState.REGISTERED, userRepository.save(user));
     }
 
     @Override
     public ResetPasswordResponse resetPassword(String token, String password) {
         return null;
+    }
+
+    @Override
+    @Transactional
+    public UserDetails loadUserByUsername(String email) {
+        User user = userRepository.findFirstByEmail(email).orElseThrow(() -> new ResourceNotFoundException("User not found"));
+        return UserDetailsImpl.build(user);
     }
 }
