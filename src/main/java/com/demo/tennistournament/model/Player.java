@@ -47,7 +47,7 @@ public class Player {
     private Gender gender;
 
     @Column
-    private BigDecimal careerEarnings;
+    private BigDecimal careerPoints;
 
     @OneToMany(mappedBy = "player",
                 cascade = CascadeType.ALL,
@@ -74,5 +74,14 @@ public class Player {
     }
 
     protected Player(){ }
+
+    public Player(User user, PrimaryHand primaryHand, byte age, Gender gender, String nationality){
+        super();
+        this.user = user;
+        this.primaryHand = primaryHand;
+        this.age = age;
+        this.gender = gender;
+        this.nationality = nationality;
+    }
 
 }

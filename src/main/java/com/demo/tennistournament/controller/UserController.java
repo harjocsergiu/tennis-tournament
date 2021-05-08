@@ -2,6 +2,7 @@ package com.demo.tennistournament.controller;
 
 import com.demo.tennistournament.exception.BadRequestException;
 import com.demo.tennistournament.exception.ResourceAlreadyExists;
+import com.demo.tennistournament.model.User;
 import com.demo.tennistournament.model.UserDetailsImpl;
 import com.demo.tennistournament.payload.response.MessageResponse;
 import com.demo.tennistournament.utils.SignupUtil;
@@ -10,6 +11,8 @@ import com.demo.tennistournament.payload.request.LoginRequest;
 import com.demo.tennistournament.payload.response.JwtResponse;
 import com.demo.tennistournament.security.jwt.JwtUtils;
 import com.demo.tennistournament.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,10 +22,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
@@ -31,8 +31,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.demo.tennistournament.exception.ExceptionMessages.*;
+import static com.demo.tennistournament.exception.SuccessMessages.ACCOUNT_SUCCESSFULLY_CREATED;
 
 @RestController
+@CrossOrigin(origins = "*")
 public class UserController {
     @Autowired
     AuthenticationManager authenticationManager;
@@ -80,7 +82,7 @@ public class UserController {
                         .path("/{id}")
                         .buildAndExpand(signupUtil.getUser().getId())
                         .toUri();
-                return ResponseEntity.created(location).build();
+                return ResponseEntity.created(location).body(ACCOUNT_SUCCESSFULLY_CREATED);
         }
         return new ResponseEntity<Object>(HttpStatus.INTERNAL_SERVER_ERROR);
     }

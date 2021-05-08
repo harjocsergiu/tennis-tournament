@@ -1,6 +1,7 @@
 package com.demo.tennistournament.model;
 
 import com.demo.tennistournament.model.enums.Gender;
+import com.demo.tennistournament.model.enums.Surface;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,8 +23,11 @@ public class Tournament {
     @Column(nullable = false,unique = true)
     private String name;
 
+//    @Enumerated(EnumType.STRING)
+//    private Gender gender;
+
     @Enumerated(EnumType.STRING)
-    private Gender gender;
+    private Surface surface;
 
     @OneToMany(mappedBy = "tournament")
     private Set<Match>  matches = new HashSet<>();
