@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.*;
 
 @Getter
@@ -38,7 +39,7 @@ public class Player {
     private int ranking;
 
     @Column(nullable = false)
-    private byte age;
+    private LocalDate birthDate;
 
     @Column
     private String nationality;
@@ -75,11 +76,11 @@ public class Player {
 
     protected Player(){ }
 
-    public Player(User user, PrimaryHand primaryHand, byte age, Gender gender, String nationality){
+    public Player(User user, PrimaryHand primaryHand, LocalDate birthDate, Gender gender, String nationality){
         super();
         this.user = user;
         this.primaryHand = primaryHand;
-        this.age = age;
+        this.birthDate = birthDate;
         this.gender = gender;
         this.nationality = nationality;
     }

@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.Optional;
 
+import static com.demo.tennistournament.exception.ExceptionMessages.PLAYER_NOT_FOUND;
+
 @RestController
 public class PlayerController {
 
@@ -25,7 +27,7 @@ public class PlayerController {
     public Player retrievePlayer(@PathVariable Long id){
         Optional<Player> player = playerRepository.findById(id);
         if(player.isEmpty())
-            throw new RuntimeException("Player not found");
+            throw new RuntimeException(PLAYER_NOT_FOUND);
         return player.get();
     }
 

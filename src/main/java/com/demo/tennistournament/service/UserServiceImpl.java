@@ -20,6 +20,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.HashSet;
 import java.util.Set;
 
+import static com.demo.tennistournament.exception.ExceptionMessages.NO_REGISTERED_EMAIL;
+
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -59,7 +61,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String email) {
-        User user = userRepository.findFirstByEmail(email).orElseThrow(() -> new ResourceNotFoundException("User not found"));
+        User user = userRepository.findFirstByEmail(email).orElseThrow(() -> new ResourceNotFoundException(NO_REGISTERED_EMAIL));
         return UserDetailsImpl.build(user);
     }
 }

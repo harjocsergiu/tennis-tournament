@@ -13,9 +13,16 @@ values (2,'email2','password2','fname2','lname2');
 insert into users(id,email,password,first_name,last_name)
 values (3,'email3','password3','fname3','lname3');
 
-insert into player(player_id,age,career_earnings,nationality,ranking)
-values(1,25,30000,'Spaniard',13);
-
 INSERT INTO roles(name) VALUES('ROLE_USER');
-INSERT INTO roles(name) VALUES('ROLE_MODERATOR');
+INSERT INTO roles(name) VALUES('ROLE_PLAYER');
 INSERT INTO roles(name) VALUES('ROLE_ADMIN');
+
+
+INSERT INTO TOURNAMENTS(id,city,name,surface,winner_points,start_date,end_date)
+values (2,'Bucuresti','Bucharest Open','CLAY',512,null,null);
+INSERT INTO TOURNAMENTS(id,city,name,surface,winner_points,start_date,end_date)
+values (3,'Sibiu','Hermanndstadt Tour','HARD',1024,null,null);
+INSERT INTO TOURNAMENTS(id,city,name,surface,winner_points,start_date,end_date)
+values (4,'Oradea','Oradea Tennis Pro League','GRASS',512,null,null);
+INSERT INTO TOURNAMENTS(id,city,name,surface,winner_points,start_date,end_date)
+values (1,'Cluj-Napoca','CJ Open','CLAY',1024,,null,null);

@@ -43,8 +43,8 @@ public class SignupUtil {
                         roles.add(adminRole);
 
                         break;
-                    case "mod":
-                        Role modRole = roleRepository.findByName(ERole.ROLE_MODERATOR)
+                    case "player":
+                        Role modRole = roleRepository.findByName(ERole.ROLE_PLAYER)
                                 .orElseThrow(() -> new ResourceNotFoundException(ROLE_NOT_FOUND));
                         roles.add(modRole);
 
