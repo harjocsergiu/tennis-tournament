@@ -5,6 +5,8 @@ import com.demo.tennistournament.repository.MatchRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -27,6 +29,10 @@ public class MatchServiceImpl implements MatchService {
             matchDetails.setStartTime(match.getStartTime());
             matchDetailsList.add(matchDetails);
         });
+
+        Comparator<MatchDetailsPOJO> byStartTime = Comparator.comparing(MatchDetailsPOJO::getStartTime);
+        matchDetailsList.sort(byStartTime);
+        Collections.reverse(matchDetailsList);
         return matchDetailsList;
     }
 }

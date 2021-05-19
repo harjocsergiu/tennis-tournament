@@ -1,8 +1,6 @@
 package com.demo.tennistournament.controller;
 
-import com.demo.tennistournament.model.Match;
 import com.demo.tennistournament.model.MatchDetailsPOJO;
-import com.demo.tennistournament.model.Player;
 import com.demo.tennistournament.repository.MatchRepository;
 import com.demo.tennistournament.service.MatchService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +19,7 @@ public class MatchController {
     private MatchService matchService;
 
     @GetMapping("/api/matches")
-    public List<MatchDetailsPOJO> retrieveAllPlayers(){
-        return  matchService.retrieveMatches();
+    public List<MatchDetailsPOJO> retrieveAllPlayers() {
+        return matchService.retrieveMatches();
     }
 }

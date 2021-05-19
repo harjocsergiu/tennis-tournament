@@ -38,6 +38,6 @@ values (3,CURRENT_TIMESTAMP-10000, 200,'MALE', 'Romania','LEFT',3);
 INSERT INTO MATCHES(id,phase,set1,set2,set3,start_time,court_id,first_player_id,second_player_id,tournament_id)
 values(1, 'FIRST_ROUND','6-1','6-2',null,CURRENT_TIMESTAMP,1,1,2,1);
 INSERT INTO MATCHES(id,phase,set1,set2,set3,start_time,court_id,first_player_id,second_player_id,tournament_id)
-values(2, 'FINAL','6-4','6-4',null,CURRENT_TIMESTAMP,1,1,2,2);
+values(2, 'FINAL','6-4','6-4',null,CURRENT_TIMESTAMP-25,1,1,2,2);
 INSERT INTO MATCHES(id,phase,set1,set2,set3,start_time,court_id,first_player_id,second_player_id,tournament_id)
-values(3, 'SEMIFINAL','6-1','2-6','7-5',CURRENT_TIMESTAMP,1,3,2,1)
+values(3, 'SEMIFINAL','6-1','2-6','7-5',CURRENT_TIMESTAMP-1,1,3,2,1)
