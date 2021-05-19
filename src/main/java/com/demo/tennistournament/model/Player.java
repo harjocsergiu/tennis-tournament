@@ -14,6 +14,7 @@ import java.util.*;
 @Getter
 @Setter
 @Entity
+@Table(name = "players")
 public class Player {
     @Id
     @GeneratedValue
@@ -42,7 +43,7 @@ public class Player {
     private LocalDate birthDate;
 
     @Column
-    private String nationality;
+    private String country;
 
     @Enumerated(EnumType.STRING)
     private Gender gender;
@@ -76,13 +77,13 @@ public class Player {
 
     protected Player(){ }
 
-    public Player(User user, PrimaryHand primaryHand, LocalDate birthDate, Gender gender, String nationality){
+    public Player(User user, PrimaryHand primaryHand, LocalDate birthDate, Gender gender, String country){
         super();
         this.user = user;
         this.primaryHand = primaryHand;
         this.birthDate = birthDate;
         this.gender = gender;
-        this.nationality = nationality;
+        this.country = country;
     }
 
 }

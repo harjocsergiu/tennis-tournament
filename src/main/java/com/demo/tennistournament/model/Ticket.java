@@ -13,6 +13,7 @@ import java.math.BigDecimal;
 @Getter
 @Setter
 @ToString
+@Table(name = "tickets")
 public class Ticket extends RepresentationModel<Ticket>{
     @Id
     @GeneratedValue

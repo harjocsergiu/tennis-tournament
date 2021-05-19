@@ -13,6 +13,8 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
+@Table(name = "matches",
+        uniqueConstraints = @UniqueConstraint(columnNames = {"first_player_id","second_player_id","tournament_id"}))
 public class Match {
 
     @Id

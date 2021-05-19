@@ -49,7 +49,7 @@ public class Tournament {
     @Column
     private Integer winnerPoints;
 
-    @Column
+    @Column(nullable = true)
     private LocalDate startDate;
 
     @Column

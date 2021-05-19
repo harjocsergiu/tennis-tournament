@@ -10,6 +10,7 @@ import java.util.*;
 @Entity
 @Getter
 @Setter
+@Table(name = "sponsors")
 public class Sponsor {
     @Id
     @GeneratedValue

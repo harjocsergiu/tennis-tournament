@@ -10,7 +10,7 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter
-@NamedQuery(name="find_all_courts",query = "select c from Court c")
+@Table(name = "courts")
 public class Court {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
